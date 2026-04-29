@@ -48,9 +48,19 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+
+       <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>com.mvit.App</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
