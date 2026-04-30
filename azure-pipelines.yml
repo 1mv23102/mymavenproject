@@ -1,19 +1,28 @@
 trigger:
 - main
+
 pool:
- name: MYLOCALPOOL
+  name: Default   # use Default (your working pool)
+
 steps:
-- task: Maven@4
-inputs:
- mavenPomFile: 'pom.xml'
- goals: 'clean package'
+
+# Step 1: Build
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+
+# Step 2: Simulate Deployment
 - script: |
- echo "Simulating deployment..."
- mkdir deployed
- copy target\*.jar deployed\
- echo "Deployment successful!"
- displayName: 'Simulate Deployment'
+    echo "Simulating deployment..."
+    mkdir deployed
+    copy target\*.jar deployed\
+    echo "Deployment successful!"
+  displayName: 'Simulate Deployment'
+
+# Step 3: Run Application
 - script: |
- echo "Running the JAR file..."
- java -jar deployed\*.jar
-displayName: 'Run Application'
+    echo "Running the JAR file..."
+    dir deployed
+    for %%f in (deployed\*.jar) do java -jar "%%f"
+  displayName: 'Run Application'
