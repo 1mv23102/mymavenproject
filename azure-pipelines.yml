@@ -7,7 +7,7 @@ pool:
 steps:
 
 # Step 1: Build
-- task: Maven@3
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean package'
